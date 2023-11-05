@@ -5,15 +5,24 @@ import {
 } from "@chakra-ui/react";
 import {ChatIcon } from "@chakra-ui/icons";
 
-
 const chatMessages = [
-    { id: 1, content: "Hey there! How can I help you today?" },
-    { id: 2, content: "I'm looking for assistance with my account." },
-    { id: 3, content: "Certainly! Could you please provide me with your account number?" },
-    { id: 4, content: "It's 123456789. Thank you!" },
-    { id: 5, content: "You're welcome! I'll look that up for you right now." },
-    // ... add more sample messages as needed
-  ];
+    { id: 1, content: "Reviewing Terms in a New Rental Agreement" },
+    { id: 2, content: "Analyzing a Job Offer Contract for Unusual Clauses" },
+    { id: 3, content: "Spotting Red Flags in a Service Agreement" },
+    { id: 4, content: "Checking a Business Contract for Deceptive Terms" },
+    { id: 5, content: "Understanding Fine Print in an Insurance Policy" },
+    { id: 6, content: "Comparing Two Contracts for Differences in Terms" },
+    { id: 7, content: "Examining a Loan Agreement for Unfair Conditions" },
+    { id: 8, content: "Clarifying Complex Language in a Legal Document" },
+    { id: 9, content: "Identifying Hidden Fees in a Subscription Service Contract" },
+    { id: 10, content: "Verifying Compliance in a Company's Terms of Service" },
+    { id: 11, content: "Evaluating a Non-Disclosure Agreement for Clarity" },
+    { id: 12, content: "Reviewing a Lease Contract for Ambiguous Terms" },
+    { id: 13, content: "Assessing a Partnership Agreement for Equitability" },
+    { id: 14, content: "Detecting Potential Loopholes in a Sales Contract" },
+    { id: 15, content: "Investigating a Vendor Agreement for Hidden Obligations" }
+];
+
 
   const ChatMessage = ({ content }) => (
     <Box
