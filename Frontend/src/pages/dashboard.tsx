@@ -69,7 +69,6 @@ const HomePage = () => {
         const s3 = new AWS.S3();
         const params = {
           Bucket: bucketName,
-          Key: file.name, // use the file name as the key
           Body: file,
           ContentType: file.type,
         };

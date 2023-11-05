@@ -2,13 +2,14 @@ import glob
 import boto3
 from aws_dynamodb import seed_table, upload_to_dynamodb
 from flask import Flask
+import random, string
 from flask_cors import CORS
 
 # IMPORTING FILES
 from aws_dynamodb import seed_table, upload_to_dynamodb, fetch_bucket_name_from_dynamodb
 from create_bucket import create_s3_bucket
 from pdf_to_text_parser import extract_text_from_pdf
-from dynamodb_to_s3 import fetch_summary_from_s3, fetch_binding_from_s3
+from dynamodb_to_s3 import fetch_summary_from_s3
 
 
 # CREATE A DYNAMODB OBJECT
@@ -21,18 +22,23 @@ s3 = boto3.client('s3')
 app = Flask(__name__)
 
 CORS(app)
+
 # SEED THE TABLE
 seed_table(dynamodb, "UserHistory")
 
-# GLOBAL VARIABLE FOR BUCKET_NAME
+# METHOD TO GENERATE RANDOM 16BIT ALPHANUM STRING
+def generate_random_string(length):
+    alphanumeric_characters = string.ascii_letters + string.digits
+    random_string = ''.join(random.choice(alphanumeric_characters) for _ in range(length))
+    return random_string
 
-flag = False
-bucket = create_s3_bucket() and flag
 
 # ROUTE TO RETURN BUCKET_NAME WHERE FRONTEND WILL UPLOAD THE FILE TO
 @app.route("/bucket")
 def bucket_name():
-    flag = True
+    bucket = create_s3_bucket()
+    items = [{'query_id' : generate_random_string(16), 'bucket_name': bucket}]
+    upload_to_dynamodb(dynamodb, items)
     return bucket
 
 
@@ -41,7 +47,7 @@ def bucket_name():
 
 # -------NOTE:  THIS WILL ONLY RUN WHEN THE BUCKET HAS A FILE CALLED "input_file".
 
-extract_text_from_pdf(bucket, "input_file")
+#extract_text_from_pdf(bucket, "input_file")
 # CREATE AWS LAMBDA
 
 
@@ -55,10 +61,10 @@ def get_history_content(dynamodb, query_id):
     s3_bucket = fetch_bucket_name_from_dynamodb(query_id)
 
     summary = fetch_summary_from_s3(s3, s3_bucket, bucket_name)
-    binding = fetch_binding_from_s3(s3, s3_bucket, bucket_name)
+    # binding = fetch_binding_from_s3(s3, s3_bucket, bucket_name)
     response = {
-        "summary": binding,
-        "binding" : summary
+        # "summary": binding,
+        # "binding" : summary
     }
 
     return response

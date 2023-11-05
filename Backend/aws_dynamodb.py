@@ -5,7 +5,7 @@
 # - We store the user_id, title and bucket name, so that we can use the
 #  bucket_name to fetch history.
 
-def seed_table(dynamodb, name):
+def seed_table(dynamodb, table_name):
 
     table_schema = [
         {
@@ -13,17 +13,9 @@ def seed_table(dynamodb, name):
             'AttributeType': 'S'
         },
         {
-            'AttributeName': 'title',
-            'AttributeType': 'S'
-        },
-        {
             'AttributeName': 'bucket_name',
             'AttributeType': 'S'
-        }, 
-        {
-            'AttributeName': 'lambda_func',
-            'AttributeType': 'S'
-        }  
+        }
     ]
 
     # Define primary key
@@ -31,12 +23,16 @@ def seed_table(dynamodb, name):
         {
             'AttributeName': 'query_id',
             'KeyType': 'HASH'
+        },
+        {
+            'AttributeName': 'bucket_name',
+            'KeyType': 'RANGE'
         }
     ]
 
     tables = dynamodb.list_tables()['TableNames']
 
-    if name not in tables:
+    if table_name not in tables:
         try:
             
             dynamodb.create_table(
@@ -48,7 +44,7 @@ def seed_table(dynamodb, name):
                     'WriteCapacityUnits': 5
                 }
             )
-            print(f'Table {name} created successfully!')
+            print(f'Table created successfully!')
         except Exception as e:
             print(f'Error creating table: {e}')
     else:
@@ -63,9 +59,7 @@ def upload_to_dynamodb(dynamodb, items):
         dynamodb.put_item(TableName = "UserHistory",
         Item={
             'query_id': {'S': item["query_id"]},
-            'query': {'S': item['query']},
-            'bucket_name': {'S': item['bucket_name']},
-            'lambda_func': {'S': item['lambda_func']}
+            'bucket_name': {'S': item['bucket_name']}
         }
         )
 

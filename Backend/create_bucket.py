@@ -46,5 +46,3 @@ def create_s3_bucket():
         print(f'Error: {response}')
         return None
 
-# Call the function to create the bucket and get the bucket name
-bucket_name = create_s3_bucket()
