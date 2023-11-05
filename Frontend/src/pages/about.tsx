@@ -5,6 +5,7 @@ import Header from '../components/Header';
 
 import DefaultHeadshot from '../../public/headshots/default_headshot.jpg'
 import GavinHeadshot from '../../public/headshots/gavin_headshot.png'
+import AnmolHeadshot from '../../public/headshots/anmol_headshot.jpg'
 
 export default function About() {
 
@@ -30,7 +31,7 @@ export default function About() {
             school: 'Arizona State University',
             major: 'CS, Math (Double major)',
             graduationDate: 'May 2025',
-            image: DefaultHeadshot,
+            image: AnmolHeadshot,
             website: 'https://www.linkedin.com/in/anmol-rao/'
 
         },

@@ -1,17 +1,18 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import "../app/globals.css";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
-// Define the types for Component and pageProps
 type AppProps = {
   Component: React.ElementType;
-  pageProps: any; // You can specify the type for pageProps if you know it
+  pageProps: any;
 };
 
-// This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ChakraProvider>
-      <Component {...pageProps} />
-    </ChakraProvider>
+    <GoogleOAuthProvider clientId="195044032993-1eohkc391ob5ltbtflj69rfse2960sn5.apps.googleusercontent.com">
+      <ChakraProvider>
+        <Component {...pageProps} />
+      </ChakraProvider>
+    </GoogleOAuthProvider>
   );
 }
