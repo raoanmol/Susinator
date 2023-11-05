@@ -1,20 +1,22 @@
-# Susinator
+<div style="display: flex; justify-content: center;">
+  <img src="assets/motto.png" alt="LegalAId Logo" width="30%">
+   <img src="assets/logo.png" alt="LegalAId Logo" width="60px" height="60px">
+</div>
+
 _**Your AI Contract Manager**_
+
 
 Susinator is a comprehensive contract analysis tool that leverages AWS Lambda, S3 buckets, SageMaker, and DynamoDB. It not only extracts and highlights critical clauses within contracts but also provides concise summaries. Additionally, it identifies legal obligations and bindings, empowering users with a clear understanding of their contractual commitments.
 
-<div style="display: flex; justify-content: center;">
-  <img src="assets/balance.png" alt="LegalAId Logo" width="30%">
-</div>
 
 ## Mission Statement
 
-LegalAId has the potential to impact a large number of lives. We believe that everyone deserves to know their rights and have access to the legal assistance they need. Our platform is dedicated to making legal information accessible, ensuring that individuals can navigate their legal situations with confidence.
+The inspiration behind Susinator stemmed from the need to revolutionize contract management. Recognizing the complexity and time-consuming nature of analyzing legal documents, we aimed to create a solution that could automate this process, making it more efficient and accessible for users.
 
-☁️ **LegalAId was made possible thanks to Google Cloud** ☁️
+☁️ **LegalAId was made possible thanks to Amazon Cloud Services** ☁️
 
   <div style="display: flex; justify-content: center;">
-  <img src="assets/gcp.png" alt="GCP Logo" width="50%">
+  <img src="assets/aws.png" alt="GCP Logo" width="50%">
   </div>
 
 ## Key Features
