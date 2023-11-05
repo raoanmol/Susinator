@@ -1,13 +1,11 @@
 <div style="display: flex; justify-content: center;">
-  <img src="assets/motto.png" alt="LegalAId Logo" width="30%">
-   <img src="assets/logo.png" alt="LegalAId Logo" width="60px" height="60px">
+  <img src="assets/motto.png" alt="Susinator Motto" width="30%">
+   <img src="assets/logo.png" alt="Susinator Logo" width="60px" height="60px">
 </div>
 
 _**Your AI Contract Manager**_
 
-
 Susinator is a comprehensive contract analysis tool that leverages AWS Lambda, S3 buckets, SageMaker, and DynamoDB. It not only extracts and highlights critical clauses within contracts but also provides concise summaries. Additionally, it identifies legal obligations and bindings, empowering users with a clear understanding of their contractual commitments.
-
 
 ## Mission Statement
 
@@ -21,90 +19,43 @@ The inspiration behind Susinator stemmed from the need to revolutionize contract
 
 ## Key Features
 
-- **Custom-Trained Google Cloud PaLM Model**: Our platform begins with a custom-trained Google Cloud PaLM model, which is trained with legal data specific to the user's country and state.
+- **Custom-Trained AWS SageMaker Model:** Harness the power of AWS SageMaker to train a custom model tailored to interpret and analyze contractual documents, extracting essential information such as employer name, salary, salary disbursement frequency, and, in the near future, detailed benefits information.
 
-- **Google Cloud Storage for Legal Documents**: We store legal documents using Google Cloud Storage, ensuring secure and reliable access.
+- **AWS Lambda for Real-Time Processing:** Utilize AWS Lambda for on-demand, real-time processing of contract documents, enabling swift analysis and summary generation without the constraints of server capacities.
 
-- **Kubernetes Vector Search in GCP**: Vector search is set up using Kubernetes inside Google Cloud Platform, enabling fast and accurate retrieval of relevant legal information.
+- **Transition from RapidAPI:** Migrate away from the limitations of RapidAPI to a more robust and customizable infrastructure, allowing for greater flexibility in processing and analyzing legal documents.
 
-- **Serverless Access with IP Whitelisting**: Serverless access is provided to specific IP addresses, ensuring a streamlined and secure environment.
+- **Benefits Analysis Expansion:** With the integration of SageMaker, broaden the scope of analysis to include a thorough breakdown of benefits provisions within contracts, providing users with a comprehensive understanding of their contractual entitlements.
 
-- **PDF to Embeddings with Google Vertex AI and Document AI**: We leverage Google Cloud's AI Vertex and Google Document AI to transform PDF pages into embeddings for our Elasticsearch instance, establishing a seamless connection in our pipeline.
+- **Secure Document Upload and Storage:** Ensure the confidentiality and integrity of user-uploaded documents through secure upload channels and encrypted storage solutions.
 
-- **Google Authentication**: Each user account is authenticated through Google Authentication, creating an efficient and secure user environment.
+- **Interactive Summary Dashboard:** Offer users an intuitive dashboard where they can interact with the summarized information, delve into specific contract clauses, and receive personalized insights on potential areas of concern.
 
-- **Python and Flask for Backend**: The entire backend of LegalAId is developed in Python, with Flask as the web framework.
+- **User Feedback Loop for Continuous Improvement:** Implement a user feedback mechanism to continually refine the model's accuracy and the app’s functionality based on real-world usage and feedback.
 
-- **Intuitive Frontend with JavaScript, React, ChakraUI, and Vite**: The frontend is designed to be user-friendly and intuitive, utilizing JavaScript, React, ChakraUI, and Vite. NodeJS is used for managing various aspects of the platform.
+- **Community-Driven Clause Clarifications:** Establish a community-driven platform where users can contribute clarifications on complex or ambiguous contract clauses, fostering a collaborative environment for demystifying legal documents.
 
-- **Google Vertex AI-Powered Chat-bot**: We've integrated a chat-bot powered by Google Vertex AI, providing accurate and precise responses to user inquiries.
+- **API for Third-Party Integrations:** Provide an API for seamless integration with third-party platforms, enabling users to directly import/export contracts from other tools and services.
 
-- **Classification Models for Legal Situations**: Using Google Vertex AI, we employ classification models to understand the exact laws most relevant to the user's situation and identify the human rights most affected by the incident. This information forms the basis for LegalAId's recommendations.
+- **Educational Resources on Contractual Terms:** Offer a rich repository of educational resources to help users better understand common contractual terms, conditions, and implications.
 
-- **Recommended Legal Attorneys with Google Maps API**: LegalAId goes a step further by recommending experienced legal attorneys along with their location, leveraging the Google Maps API to provide users with the best possible service for their case.
+## Future Development 
 
 ## How to Run this WebApp:
 
-## Installation and Usage
+1. ``git clone <repository_URL>`` onto your machine
+2. Set up your AWS Credentials
+3. Connect your AWS S3 Bucket
+    - Put ``NEXT_PUBLIC_AWS_ACCESS_KEY_ID_1``, ``NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY_1``, and ``NEXT_PUBLIC_AWS_BUCKET_REGION_1``in ``.env.local`` (in root of frontend folder)
+5. cd SunHacks23
+6. run the frontend
+    - cd frontend
+    - npm install
+    - npm run dev
+7. run the backend
+    - cd Backend
+    - python server.py
+8. Open a web browser and go to `localhost:3000` to access the application
 
-1. **Clone the Repository**:
-   - Command: `git clone <repository_URL>`
-   - Description: Retrieve a copy of the project from the specified Git repository.
-
-2. **Install Dependencies**:
-   - Command: `npm i`
-   - Description: Use Node Package Manager (npm) to install all required project dependencies.
-
-3. **Run Backend Server**:
-   - Command: `cd backend; python3 app.py`
-   - Description: Navigate to the backend directory and execute the Flask application using Python 3. Ensure that any occurrences of `python` in `app.py` are replaced with `python3`.
-
-4. **Install Backend Dependencies**:
-   - Command: `cd backend; python3 app.py`
-   - Description: This command, executed in the backend directory, installs all necessary backend dependencies.
-
-5. **Run Frontend Development Server**:
-   - Command: `cd frontend; npm run dev`
-   - Description: Navigate to the frontend directory and initiate the development server using npm.
-
-6. **Access the Application**:
-   - Description: Open a web browser and go to `localhost:<port_number>` (replace `<port_number>` with the specified port) to access the application.
-
-7. **Follow Guidelines**:
-   - Description: Refer to the provided guidelines or instructions for further usage.
-
-8. **Login using Google OAuth (Optional)**:
-   - Description: Optionally, you can choose to log in using Google OAuth for enhanced authentication and user experience. Follow the relevant prompts or instructions provided within the application.
-
-
-
-## Our results
-
-- **API Metrics**:
-<div style="display: flex; justify-content: center;">
-  <img src="assets/Screenshot 2023-10-22 070353.png" alt="Hard Pic" width="50%">
-</div>
-
-- **Elastic Search on Kubernetes Engine**:
-<div style="display: flex; justify-content: center;">
-  <img src="assets/Screenshot 2023-10-22 070458.png" alt="Hard Pic" width="50%">
-</div>
-
-- **Setting Up Buckets in GCP for Storage of Dataset**:
-<div style="display: flex; justify-content: center;">
-  <img src="assets/Screenshot 2023-10-22 070532.png" alt="Hard Pic" width="50%">
-</div>
-
-- **And finally, our WebApp 🎉🙌🥳**:
-<div style="display: flex; justify-content: center;">
-  <img src="assets/image.png" alt="Hard Pic" width="50%">
-</div>
-
-
-## Meet the team
-_**In order from left to right**_
-<div style="display: flex; justify-content: center;">
-  <img src="assets/hardpic.jpeg" alt="Hard Pic" width="50%">
-</div>
-
-_**Anmol Rao, Gavin Holtzapple, Taman Truong & Chaitanya Chaurasia (l to r)**_
+## Created By
+_**Anmol Rao, Gavin Holtzapple, Taman Truong & Chaitanya Chaurasia**_

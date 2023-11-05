@@ -1,13 +1,32 @@
 import React, { useState } from "react";
 import {
-  Box, Flex, Text, VStack, Button, useToast, Input, Textarea,
-  Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter,
-  List, ListItem, IconButton, Checkbox, Icon, Heading
+  Box,
+  Flex,
+  Text,
+  VStack,
+  Button,
+  useToast,
+  Input,
+  Textarea,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  List,
+  ListItem,
+  IconButton,
+  Checkbox,
+  Icon,
+  Heading,
 } from "@chakra-ui/react";
+
 import Header from "../components/Header";
-import History from "../components/History"
+import History from "../components/History";
 import { AttachmentIcon, DeleteIcon, ChatIcon } from "@chakra-ui/icons";
-import { useDropzone } from 'react-dropzone';
+import { useDropzone } from "react-dropzone";
 import AWS from "aws-sdk";
 import axios from "axios";
 
@@ -33,7 +52,6 @@ const HomePage = () => {
   const [file, setFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
-
   const handleFileChange = (event) => {
     const uploadedFile = event.target.files ? event.target.files[0] : null;
     setFile(uploadedFile);
@@ -51,9 +69,8 @@ const HomePage = () => {
         const s3 = new AWS.S3();
         const params = {
           Bucket: bucketName,
-          Key: file.name, // use the file name as the key
           Body: file,
-          ContentType: file.type
+          ContentType: file.type,
         };
 
         s3.upload(params, (err, data) => {
@@ -105,11 +122,11 @@ const HomePage = () => {
   };
 
   const handleRemoveFile = (fileName) => {
-    setDropzoneFiles(dropzoneFiles.filter(file => file.name !== fileName));
+    setDropzoneFiles(dropzoneFiles.filter((file) => file.name !== fileName));
   };
 
   const handleUpload = () => {
-    dropzoneFiles.forEach(file => {
+    dropzoneFiles.forEach((file) => {
       handleFileUpload(file);
     });
 
@@ -123,16 +140,13 @@ const HomePage = () => {
     });
   };
 
-
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: {
-      'application/pdf': ['.pdf'],
-      'text/plain': ['.txt']
+      "application/pdf": [".pdf"],
+      "text/plain": [".txt"],
     },
-    onDrop: handleDropzoneChange
+    onDrop: handleDropzoneChange,
   });
-
- 
 
   return (
     <Flex flexDirection="column" h="150vh">
@@ -140,10 +154,24 @@ const HomePage = () => {
       <Flex flexGrow={1} pt={{ base: "60px", md: "150px" }}>
         <History />
         <Flex w="75%" flexDirection="column" p={4} bg="gray.200">
-          <Box position="fixed" bottom="0" w="75%" p={4} bg="gray.200" borderTop="1px solid gray" shadow="md">
+          <Box
+            position="fixed"
+            bottom="0"
+            w="75%"
+            p={4}
+            bg="gray.200"
+            borderTop="1px solid gray"
+            shadow="md"
+          >
             <Flex justifyContent="center" alignItems="center">
               {/* File Upload Section */}
-              <Flex alignItems="center" mr={6} borderRadius="md" p={2} shadow="sm">
+              <Flex
+                alignItems="center"
+                mr={6}
+                borderRadius="md"
+                p={2}
+                shadow="sm"
+              >
                 <Button
                   leftIcon={<AttachmentIcon />}
                   colorScheme="purple"
@@ -154,12 +182,18 @@ const HomePage = () => {
               </Flex>
 
               {/* Text Input Section */}
-              <Button colorScheme="purple" onClick={() => setIsModalOpen(true)}>Insert Text</Button>
+              <Button colorScheme="purple" onClick={() => setIsModalOpen(true)}>
+                Insert Text
+              </Button>
             </Flex>
           </Box>
 
           {/* Modal for Text Input */}
-          <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} size="xl">
+          <Modal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            size="xl"
+          >
             <ModalOverlay />
             <ModalContent shadow="xl">
               <ModalHeader>Insert Text</ModalHeader>
@@ -177,7 +211,11 @@ const HomePage = () => {
                 />
               </ModalBody>
               <ModalFooter>
-                <Button colorScheme="blue" mr={3} onClick={() => setIsModalOpen(false)}>
+                <Button
+                  colorScheme="blue"
+                  mr={3}
+                  onClick={() => setIsModalOpen(false)}
+                >
                   Close
                 </Button>
                 <Button variant="ghost">Insert</Button>
@@ -192,23 +230,41 @@ const HomePage = () => {
               <ModalHeader>Upload Files</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
-                <Box {...getRootProps()} borderWidth="2px" borderStyle="dashed" borderColor={isDragActive ? "blue.300" : "gray.300"} p={5} textAlign="center">
+                <Box
+                  {...getRootProps()}
+                  borderWidth="2px"
+                  borderStyle="dashed"
+                  borderColor={isDragActive ? "blue.300" : "gray.300"}
+                  p={5}
+                  textAlign="center"
+                >
                   <input {...getInputProps()} />
                   <p>Drag and drop files here, or click to select files</p>
                   <p>Accepted file types: PDF, TXT</p>
                 </Box>
                 <List spacing={3} mt={4}>
                   {dropzoneFiles.map((file, index) => (
-                    <ListItem key={index} d="flex" alignItems="center" justifyContent="space-between">
+                    <ListItem
+                      key={index}
+                      d="flex"
+                      alignItems="center"
+                      justifyContent="space-between"
+                    >
                       <Box flex="1">{file.name}</Box>
-                      <IconButton aria-label="Remove file" icon={<DeleteIcon />} onClick={() => handleRemoveFile(file.name)} />
+                      <IconButton
+                        aria-label="Remove file"
+                        icon={<DeleteIcon />}
+                        onClick={() => handleRemoveFile(file.name)}
+                      />
                     </ListItem>
                   ))}
                 </List>
               </ModalBody>
               <ModalFooter>
                 <Button onClick={handleUploadModalClose}>Cancel</Button>
-                <Button colorScheme="blue" onClick={handleUpload}>Upload</Button>
+                <Button colorScheme="blue" onClick={handleUpload}>
+                  Upload
+                </Button>
               </ModalFooter>
             </ModalContent>
           </Modal>
