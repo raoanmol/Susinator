@@ -55,7 +55,7 @@ def get_history_content(dynamodb, query_id):
     binding = fetch_binding_from_s3(s3, s3_bucket)
     response = {
         "summary": binding,
-        "binding" summary
+        "binding" : summary
     }
 
     return response
