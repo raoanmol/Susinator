@@ -7,13 +7,10 @@ import Header from '../components/Header'
 export default function Home() {
 
     return (
-        
+
         <AnimatePresence>
             <Header />
             <div className="min-h-[100vh] sm:min-h-screen w-screen flex flex-col relative bg-[#1d0148] font-inter overflow-hidden">
-
-                
-
                 <svg
                     style={{ filter: "contrast(125%) brightness(110%)" }}
                     className="fixed z-[1] w-full h-full opacity-[35%]"
@@ -63,26 +60,26 @@ export default function Home() {
                     >
                         <div className="w-1/3">
                             <h2 className="flex items-center font-semibold text-[2em] text-[#88f8ff]">
-                            Analyze
+                                Analyze
                             </h2>
                             <p className="text-[14px] leading-[20px] text-[#24cee0] font-normal">
-                            Upload your contracts to have them analyzed and interpreted by our system.
+                                Upload your contracts to have them analyzed and interpreted by our system.
                             </p>
                         </div>
                         <div className="w-1/3">
                             <h2 className="flex items-center font-semibold text-[2em] text-[#88f8ff]">
-                            Understand
+                                Understand
                             </h2>
                             <p className="text-[14px] leading-[20px] text-[#24cee0] font-normal">
-                            Transform complex legal jargon into simple language to better understand your rights and responsibilities.
+                                Transform complex legal jargon into simple language to better understand your rights and responsibilities.
                             </p>
                         </div>
                         <div className="w-1/3">
                             <h2 className="flex items-center font-semibold text-[2em] text-[#88f8ff]">
-                            Verify
+                                Verify
                             </h2>
                             <p className="text-[14px] leading-[20px] text-[#24cee0] font-normal">
-                            Ensure the legitimacy of your contracts with our comprehensive verification process.
+                                Ensure the legitimacy of your contracts with our comprehensive verification process.
                             </p>
                         </div>
                     </motion.div>
