@@ -16,7 +16,7 @@ The inspiration behind Susinator stemmed from the need to revolutionize contract
 ☁️ **Susinator was made possible thanks to Amazon Cloud Services** ☁️
 
   <div style="display: flex; justify-content: center;">
-  <img src="assets/aws.png" alt="GCP Logo" width="25%" height="170px">
+  <img src="assets/aws.png" alt="GCP Logo" width="30%" height="170px">
   </div>
 
 ## Key Features
