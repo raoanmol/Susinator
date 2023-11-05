@@ -13,6 +13,9 @@ from dynamodb_to_s3 import fetch_summary_from_s3, fetch_binding_from_s3
 # CREATE A DYNAMODB OBJECT
 dynamodb = boto3.client('dynamodb')
 
+# CREATE A S3 OBJECT
+s3 = boto3.client('s3')
+
 # CREATING FLASK APP
 app = Flask(__name__)
 
@@ -48,8 +51,8 @@ extract_text_from_pdf(bucket_name, "input_file", "C:/Users/chait/Desktop")
 def get_history_content(dynamodb, query_id):
     s3_bucket = fetch_bucket_name_from_dynamodb(query_id)
 
-    summary = fetch_summary_from_s3(s3_bucket)
-    binding = fetch_binding_from_s3(s3_bucket)
+    summary = fetch_summary_from_s3(s3, s3_bucket)
+    binding = fetch_binding_from_s3(s3, s3_bucket)
     response = {
         "summary": binding,
         "binding" summary
