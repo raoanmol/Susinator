@@ -5,6 +5,7 @@ import {
   List, ListItem, IconButton, Checkbox, Icon, Heading
 } from "@chakra-ui/react";
 import Header from "../components/Header";
+import History from "../components/History"
 import { AttachmentIcon, DeleteIcon, ChatIcon } from "@chakra-ui/icons";
 import { useDropzone } from 'react-dropzone';
 import AWS from "aws-sdk";
@@ -131,47 +132,13 @@ const HomePage = () => {
     onDrop: handleDropzoneChange
   });
 
-  const chatMessages = [
-    { id: 1, content: "Hey there! How can I help you today?" },
-    { id: 2, content: "I'm looking for assistance with my account." },
-    { id: 3, content: "Certainly! Could you please provide me with your account number?" },
-    { id: 4, content: "It's 123456789. Thank you!" },
-    { id: 5, content: "You're welcome! I'll look that up for you right now." },
-    // ... add more sample messages as needed
-  ];
-
-  const ChatMessage = ({ content }) => (
-    <Box
-      pl={4}
-      pr={4}
-      pt={2}
-      pb={2}
-      display="flex"
-      alignItems="center"
-      bg="gray.300"
-      borderBottom="1px solid"
-      borderColor="gray.200"
-      _last={{ borderBottom: 'none' }} // Removes border from the last item
-    >
-      <Icon as={ChatIcon} color="gray.500" mr={3} />
-      <Text isTruncated maxWidth="90%">
-        {content}
-      </Text>
-    </Box>
-  );
+ 
 
   return (
     <Flex flexDirection="column" h="150vh">
       <Header />
       <Flex flexGrow={1} pt={{ base: "60px", md: "150px" }}>
-        <Box w="25%" bg="gray.300" p={4} borderRight="1px solid gray" shadow="sm">
-          <Heading size="md" mb={4}>History</Heading>
-          <VStack align="stretch" spacing={4} overflowY="auto">
-            {chatMessages.map((message) => (
-              <ChatMessage key={message.id} content={message.content} />
-            ))}
-          </VStack>
-        </Box>
+        <History />
         <Flex w="75%" flexDirection="column" p={4} bg="gray.200">
           <Box position="fixed" bottom="0" w="75%" p={4} bg="gray.200" borderTop="1px solid gray" shadow="md">
             <Flex justifyContent="center" alignItems="center">
