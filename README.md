@@ -13,10 +13,10 @@ Susinator is a comprehensive contract analysis tool that leverages AWS Lambda, S
 
 The inspiration behind Susinator stemmed from the need to revolutionize contract management. Recognizing the complexity and time-consuming nature of analyzing legal documents, we aimed to create a solution that could automate this process, making it more efficient and accessible for users.
 
-☁️ **LegalAId was made possible thanks to Amazon Cloud Services** ☁️
+☁️ **Susinator was made possible thanks to Amazon Cloud Services** ☁️
 
   <div style="display: flex; justify-content: center;">
-  <img src="assets/aws.png" alt="GCP Logo" width="50%">
+  <img src="assets/aws.png" alt="GCP Logo" width="25%" height="170px">
   </div>
 
 ## Key Features
