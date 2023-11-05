@@ -1,14 +1,14 @@
 # TODO: Check if the db has the same bucket name, if it does, generate a new bucket name
 
-import boto3
-import string
-import random
+# IMPORT LIBRARIES
+import boto3, string, random
 
 def generate_random_string(length=10):
     letters = string.ascii_lowercase
     return ''.join(random.choice(letters) for i in range(length))
 
 def create_s3_bucket():
+
     # Initialize a session using Amazon S3
     s3 = boto3.client('s3')
 

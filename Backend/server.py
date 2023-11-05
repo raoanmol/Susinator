@@ -2,26 +2,70 @@ import boto3
 from aws_dynamodb import seed_table, upload_to_dynamodb
 from flask import Flask
 
+# IMPORTING FILES
+from aws_dynamodb import seed_table, upload_to_dynamodb, fetch_bucket_name_from_dynamodb
+from create_bucket import create_s3_bucket
+from parser import extract_text_from_pdf
+from dynamodb_to_s3 import fetch_summary_from_s3, fetch_binding_from_s3
+
+
+
 # CREATE A DYNAMODB OBJECT
 dynamodb = boto3.client('dynamodb')
 
-# CREATING FLASK
+# CREATING FLASK APP
 app = Flask(__name__)
 
-# SEED TABLE INTO AWS IF IT ALREADY DOESNT EXIST
-seed_table(dynamodb, name="UserHistory")
 
-# METHODS TO PARSE THE PDF FILE
+# SEED THE TABLE
+seed_table(dynamodb, "UserHistory")
+
+# GLOBAL VARIABLE FOR BUCKET_NAME
+bucket_name = ""
 
 
-items_to_upload = [
-    {'user_id': 'user1', 'query': 'Query 1'},
-    {'user_id': 'user2', 'query': 'Query 2'},
-    {'user_id': 'user3', 'query': 'Query 3'}
-]
+# ROUTE TO RETURN BUCKET_NAME WHERE FRONTEND WILL UPLOAD THE FILE TO
+@app.route("/bucket")
+def bucket_name():
+    bucket_name += create_s3_bucket()
+    return bucket_name
 
-upload_to_dynamodb(dynamodb, "1234567890", items_to_upload)
+# AFTER FRONTEND UPLOADS THE BUCKET, CALL THE PARSER TO FETCH FROM THE BUCKET, AND THEN PARSE IT. 
+# ONCE PARSING IS DONE, UPLOAD THE PARSED CONTENT INTO THE S3 BUCKET AS AN output.txt FILE.
 
+# -------NOTE:  THIS WILL ONLY RUN WHEN THE BUCKET HAS A FILE CALLED "input_file".
+extract_text_from_pdf(bucket_name, "input_file", "C:/Users/chait/Desktop")
+
+# CREATE AWS LAMBDA
+
+
+# UPLOAD TO DATABASE 
+
+
+
+# CREATE A ROUTE THAT FETCHES FROM DATABASE, GIVEN A query_id IS PASSED
+@app.route("/history")
+def get_history_content(dynamodb, query_id):
+    s3_bucket = fetch_bucket_name_from_dynamodb(query_id)
+
+    summary = fetch_summary_from_s3(s3_bucket)
+    binding = fetch_binding_from_s3(s3_bucket)
+    response = {
+        "summary": binding,
+        "binding" summary
+    }
+
+    return response
+
+
+# NOW THAT THE PDF CONTENTS HAVE BEEN PARSED INTO A TXT FILE IN THE S3 BUCKET, WE HAVE TO DO TWO THINGS IN PARALLEL:
+# SUMMARIZE THE IMPORTANT BITS OF THIS DOCUMENT, AND IDENTIFY LEGAL BINDINGS/REPORT ANALYSIS OF THE CONTRACT
+
+
+
+
+
+# RUN BACKEND SERVER
 if __name__ == "__main__":
     app.run(debug=True)
 
