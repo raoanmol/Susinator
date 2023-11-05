@@ -19,27 +19,27 @@ The inspiration behind Susinator stemmed from the need to revolutionize contract
 
 ## Key Features
 
-- **Custom-Trained Google Cloud PaLM Model**: Our platform begins with a custom-trained Google Cloud PaLM model, which is trained with legal data specific to the user's country and state.
+- **Custom-Trained AWS SageMaker Model:** Harness the power of AWS SageMaker to train a custom model tailored to interpret and analyze contractual documents, extracting essential information such as employer name, salary, salary disbursement frequency, and, in the near future, detailed benefits information.
 
-- **Google Cloud Storage for Legal Documents**: We store legal documents using Google Cloud Storage, ensuring secure and reliable access.
+- **AWS Lambda for Real-Time Processing:** Utilize AWS Lambda for on-demand, real-time processing of contract documents, enabling swift analysis and summary generation without the constraints of server capacities.
 
-- **Kubernetes Vector Search in GCP**: Vector search is set up using Kubernetes inside Google Cloud Platform, enabling fast and accurate retrieval of relevant legal information.
+- **Transition from RapidAPI:** Migrate away from the limitations of RapidAPI to a more robust and customizable infrastructure, allowing for greater flexibility in processing and analyzing legal documents.
 
-- **Serverless Access with IP Whitelisting**: Serverless access is provided to specific IP addresses, ensuring a streamlined and secure environment.
+- **Benefits Analysis Expansion:** With the integration of SageMaker, broaden the scope of analysis to include a thorough breakdown of benefits provisions within contracts, providing users with a comprehensive understanding of their contractual entitlements.
 
-- **PDF to Embeddings with Google Vertex AI and Document AI**: We leverage Google Cloud's AI Vertex and Google Document AI to transform PDF pages into embeddings for our Elasticsearch instance, establishing a seamless connection in our pipeline.
+- **Secure Document Upload and Storage:** Ensure the confidentiality and integrity of user-uploaded documents through secure upload channels and encrypted storage solutions.
 
-- **Google Authentication**: Each user account is authenticated through Google Authentication, creating an efficient and secure user environment.
+- **Interactive Summary Dashboard:** Offer users an intuitive dashboard where they can interact with the summarized information, delve into specific contract clauses, and receive personalized insights on potential areas of concern.
 
-- **Python and Flask for Backend**: The entire backend of LegalAId is developed in Python, with Flask as the web framework.
+- **User Feedback Loop for Continuous Improvement:** Implement a user feedback mechanism to continually refine the model's accuracy and the app’s functionality based on real-world usage and feedback.
 
-- **Intuitive Frontend with JavaScript, React, ChakraUI, and Vite**: The frontend is designed to be user-friendly and intuitive, utilizing JavaScript, React, ChakraUI, and Vite. NodeJS is used for managing various aspects of the platform.
+- **Community-Driven Clause Clarifications:** Establish a community-driven platform where users can contribute clarifications on complex or ambiguous contract clauses, fostering a collaborative environment for demystifying legal documents.
 
-- **Google Vertex AI-Powered Chat-bot**: We've integrated a chat-bot powered by Google Vertex AI, providing accurate and precise responses to user inquiries.
+- **API for Third-Party Integrations:** Provide an API for seamless integration with third-party platforms, enabling users to directly import/export contracts from other tools and services.
 
-- **Classification Models for Legal Situations**: Using Google Vertex AI, we employ classification models to understand the exact laws most relevant to the user's situation and identify the human rights most affected by the incident. This information forms the basis for LegalAId's recommendations.
+- **Educational Resources on Contractual Terms:** Offer a rich repository of educational resources to help users better understand common contractual terms, conditions, and implications.
 
-- **Recommended Legal Attorneys with Google Maps API**: LegalAId goes a step further by recommending experienced legal attorneys along with their location, leveraging the Google Maps API to provide users with the best possible service for their case.
+## Future Development 
 
 ## How to Run this WebApp:
 
