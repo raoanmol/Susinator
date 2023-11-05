@@ -3,7 +3,7 @@ from io import BytesIO
 from upload_to_s3 import upload_file_to_s3  # Make sure to import the updated function
 import time
 
-def extract_text_from_pdf(bucket_name, file_name, output_file_name):
+def extract_text_from_pdf(bucket_name, file_name):
     # Create a Textract client
     textract = boto3.client('textract')
 

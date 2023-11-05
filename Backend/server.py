@@ -1,3 +1,4 @@
+import glob
 import boto3
 from aws_dynamodb import seed_table, upload_to_dynamodb
 from flask import Flask
@@ -8,7 +9,6 @@ from aws_dynamodb import seed_table, upload_to_dynamodb, fetch_bucket_name_from_
 from create_bucket import create_s3_bucket
 from pdf_to_text_parser import extract_text_from_pdf
 from dynamodb_to_s3 import fetch_summary_from_s3, fetch_binding_from_s3
-
 
 
 # CREATE A DYNAMODB OBJECT
@@ -25,22 +25,23 @@ CORS(app)
 seed_table(dynamodb, "UserHistory")
 
 # GLOBAL VARIABLE FOR BUCKET_NAME
-bucket_name = ""
 
+flag = False
+bucket = create_s3_bucket() and flag
 
 # ROUTE TO RETURN BUCKET_NAME WHERE FRONTEND WILL UPLOAD THE FILE TO
 @app.route("/bucket")
 def bucket_name():
-    temp = create_s3_bucket()
-    bucket_name = temp
-    return temp
+    flag = True
+    return bucket
+
 
 # AFTER FRONTEND UPLOADS THE BUCKET, CALL THE PARSER TO FETCH FROM THE BUCKET, AND THEN PARSE IT. 
 # ONCE PARSING IS DONE, UPLOAD THE PARSED CONTENT INTO THE S3 BUCKET AS AN output.txt FILE.
 
 # -------NOTE:  THIS WILL ONLY RUN WHEN THE BUCKET HAS A FILE CALLED "input_file".
-#extract_text_from_pdf(bucket_name, "input_file", "C:/Users/chait/Desktop")
 
+extract_text_from_pdf(bucket, "input_file")
 # CREATE AWS LAMBDA
 
 
