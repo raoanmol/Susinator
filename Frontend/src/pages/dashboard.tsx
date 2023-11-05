@@ -35,7 +35,7 @@ const HomePage = () => {
 
         const params = {
           Bucket: bucketName,
-          Key: `pdf/${file.name}`,
+          Key: "input_file",
           Body: file,
           ContentType: "application/pdf",
         };

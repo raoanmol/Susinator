@@ -57,11 +57,7 @@ def get_history_content(dynamodb, query_id):
     binding = fetch_binding_from_s3(s3, s3_bucket, bucket_name)
     response = {
         "summary": binding,
-<<<<<<< HEAD
-        "binding": summary
-=======
         "binding" : summary
->>>>>>> 8c3da6a57c70054ea575c34970d61d38676958af
     }
 
     return response

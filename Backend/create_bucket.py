@@ -8,7 +8,6 @@ def generate_random_string(length=10):
     return ''.join(random.choice(letters) for i in range(length))
 
 def create_s3_bucket():
-
     # Initialize a session using Amazon S3
     s3 = boto3.client('s3')
 
@@ -26,6 +25,22 @@ def create_s3_bucket():
     # Ensure the bucket was created successfully
     if response['ResponseMetadata']['HTTPStatusCode'] == 200:
         print(f'Bucket {bucket_name} created successfully')
+        
+        # Add CORS configuration to the bucket
+        cors_configuration = {
+            'CORSRules': [
+                {
+                    'AllowedHeaders': ['*'],
+                    'AllowedMethods': ['GET', 'PUT', 'POST', 'DELETE'],
+                    'AllowedOrigins': ['*'],
+                    'ExposeHeaders': [],
+                    'MaxAgeSeconds': 3000,
+                }
+            ]
+        }
+        
+        s3.put_bucket_cors(Bucket=bucket_name, CORSConfiguration=cors_configuration)
+
         return bucket_name
     else:
         print(f'Error: {response}')
