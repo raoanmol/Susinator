@@ -1,3 +1,4 @@
+# txt files direct copy to output.txt
 import boto3
 import time
 
