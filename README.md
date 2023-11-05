@@ -1,13 +1,11 @@
 <div style="display: flex; justify-content: center;">
-  <img src="assets/motto.png" alt="LegalAId Logo" width="30%">
-   <img src="assets/logo.png" alt="LegalAId Logo" width="60px" height="60px">
+  <img src="assets/motto.png" alt="Susinator Motto" width="30%">
+   <img src="assets/logo.png" alt="Susinator Logo" width="60px" height="60px">
 </div>
 
 _**Your AI Contract Manager**_
 
-
 Susinator is a comprehensive contract analysis tool that leverages AWS Lambda, S3 buckets, SageMaker, and DynamoDB. It not only extracts and highlights critical clauses within contracts but also provides concise summaries. Additionally, it identifies legal obligations and bindings, empowering users with a clear understanding of their contractual commitments.
-
 
 ## Mission Statement
 
@@ -45,66 +43,19 @@ The inspiration behind Susinator stemmed from the need to revolutionize contract
 
 ## How to Run this WebApp:
 
-## Installation and Usage
+1. ``git clone <repository_URL>`` onto your machine
+2. Set up your AWS Credentials
+3. Connect your AWS S3 Bucket
+    - Put ``NEXT_PUBLIC_AWS_ACCESS_KEY_ID_1``, ``NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY_1``, and ``NEXT_PUBLIC_AWS_BUCKET_REGION_1``in ``.env.local`` (in root of frontend folder)
+5. cd SunHacks23
+6. run the frontend
+    - cd frontend
+    - npm install
+    - npm run dev
+7. run the backend
+    - cd Backend
+    - python server.py
+8. Open a web browser and go to `localhost:3000` to access the application
 
-1. **Clone the Repository**:
-   - Command: `git clone <repository_URL>`
-   - Description: Retrieve a copy of the project from the specified Git repository.
-
-2. **Install Dependencies**:
-   - Command: `npm i`
-   - Description: Use Node Package Manager (npm) to install all required project dependencies.
-
-3. **Run Backend Server**:
-   - Command: `cd backend; python3 app.py`
-   - Description: Navigate to the backend directory and execute the Flask application using Python 3. Ensure that any occurrences of `python` in `app.py` are replaced with `python3`.
-
-4. **Install Backend Dependencies**:
-   - Command: `cd backend; python3 app.py`
-   - Description: This command, executed in the backend directory, installs all necessary backend dependencies.
-
-5. **Run Frontend Development Server**:
-   - Command: `cd frontend; npm run dev`
-   - Description: Navigate to the frontend directory and initiate the development server using npm.
-
-6. **Access the Application**:
-   - Description: Open a web browser and go to `localhost:<port_number>` (replace `<port_number>` with the specified port) to access the application.
-
-7. **Follow Guidelines**:
-   - Description: Refer to the provided guidelines or instructions for further usage.
-
-8. **Login using Google OAuth (Optional)**:
-   - Description: Optionally, you can choose to log in using Google OAuth for enhanced authentication and user experience. Follow the relevant prompts or instructions provided within the application.
-
-
-
-## Our results
-
-- **API Metrics**:
-<div style="display: flex; justify-content: center;">
-  <img src="assets/Screenshot 2023-10-22 070353.png" alt="Hard Pic" width="50%">
-</div>
-
-- **Elastic Search on Kubernetes Engine**:
-<div style="display: flex; justify-content: center;">
-  <img src="assets/Screenshot 2023-10-22 070458.png" alt="Hard Pic" width="50%">
-</div>
-
-- **Setting Up Buckets in GCP for Storage of Dataset**:
-<div style="display: flex; justify-content: center;">
-  <img src="assets/Screenshot 2023-10-22 070532.png" alt="Hard Pic" width="50%">
-</div>
-
-- **And finally, our WebApp 🎉🙌🥳**:
-<div style="display: flex; justify-content: center;">
-  <img src="assets/image.png" alt="Hard Pic" width="50%">
-</div>
-
-
-## Meet the team
-_**In order from left to right**_
-<div style="display: flex; justify-content: center;">
-  <img src="assets/hardpic.jpeg" alt="Hard Pic" width="50%">
-</div>
-
-_**Anmol Rao, Gavin Holtzapple, Taman Truong & Chaitanya Chaurasia (l to r)**_
+## Created By
+_**Anmol Rao, Gavin Holtzapple, Taman Truong & Chaitanya Chaurasia**_
