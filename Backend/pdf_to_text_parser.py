@@ -1,11 +1,9 @@
-# txt files direct copy to output.txt
 import boto3
+from io import BytesIO
+from upload_to_s3 import upload_file_to_s3  # Make sure to import the updated function
 import time
-from upload_to_s3 import upload_file_to_s3
 
-
-def extract_text_from_pdf(bucket_name, file_name, output_file_path):
-
+def extract_text_from_pdf(bucket_name, file_name, output_file_name):
     # Create a Textract client
     textract = boto3.client('textract')
 
@@ -25,7 +23,7 @@ def extract_text_from_pdf(bucket_name, file_name, output_file_path):
     # Wait for the job to complete
     print(f'Waiting for job {job_id} to complete...')
     status = ''
-
+    
     while True:
         response = textract.get_document_text_detection(JobId=job_id)
         status = response['JobStatus']
@@ -37,24 +35,22 @@ def extract_text_from_pdf(bucket_name, file_name, output_file_path):
         print(f'Job status: {status}')
         time.sleep(5)
 
-    # Write the text to the output file
+    # Collect the text
     pages = []
     next_token = None
-
+    
     while True:
         response = textract.get_document_text_detection(JobId=job_id, NextToken=next_token) if next_token else textract.get_document_text_detection(JobId=job_id)
-
         pages.extend(response['Blocks'])
-
         next_token = response.get('NextToken', None)
         if not next_token:
             break
+    
+    # Create a string to hold the text data
+    text_data = ''
+    for block in pages:
+        if block['BlockType'] == 'LINE':
+            text_data += block['Text'] + '\n'
 
-    # CREATING AN output.txt
-    with open(output_file_path, 'w') as f:
-        for block in pages:
-            if block['BlockType'] == 'LINE':
-                f.write(block['Text'] + '\n')
-
-    # UPLOAD output.txt TO S3 BUCKET AGAIN
-    upload_file_to_s3(output_file_path, bucket_name, output_file_path)
+    # Upload the text data to S3
+    upload_file_to_s3(text_data, bucket_name, output_file_name)
