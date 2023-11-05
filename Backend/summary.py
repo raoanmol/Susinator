@@ -1,5 +1,6 @@
 import boto3
 import re
+from upload_to_s3 import upload_file_to_s3  # Import the upload_file_to_s3 function
 
 # Initialize a session using Amazon S3
 s3 = boto3.client('s3')
@@ -18,7 +19,12 @@ employer_info = re.search(employer_pattern, file_content)
 salary_info = re.search(salary_pattern, file_content)
 pay_frequency_info = re.search(pay_frequency_pattern, file_content)
 
-# Print the extracted information
-print(f'Employer: {employer_info.group(1) if employer_info else "N/A"}')
-print(f'Salary: {salary_info.group(1) if salary_info else "N/A"}')
-print(f'Pay Frequency: {pay_frequency_info.group(1) if pay_frequency_info else "N/A"}')
+# Format the extracted information as a string
+extracted_info = f"""
+Employer: {employer_info.group(1) if employer_info else "N/A"}
+Salary: {salary_info.group(1) if salary_info else "N/A"}
+Pay Frequency: {pay_frequency_info.group(1) if pay_frequency_info else "N/A"}
+"""
+
+# Call the upload_file_to_s3 function to upload the extracted information to S3
+upload_file_to_s3(extracted_info, 'sunhacksbucket', 'summary.txt')
