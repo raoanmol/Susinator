@@ -2,17 +2,17 @@
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState, useEffect } from 'react';
+import Header from '../components/Header'
 
 export default function Home() {
 
     return (
+        
         <AnimatePresence>
+            <Header />
             <div className="min-h-[100vh] sm:min-h-screen w-screen flex flex-col relative bg-[#1d0148] font-inter overflow-hidden">
 
-                <header className="flex justify-start items-center p-5 bg-[#1d0148] z-[1000] space-x-4">
-                    <img src="./logo_square.webp" alt="Susinator Logo" className="h-20 w-auto" />
-                    <h1 className="text-[#8d64e4] font-bold text-7xl">Susinator</h1>
-                </header>
+                
 
                 <svg
                     style={{ filter: "contrast(125%) brightness(110%)" }}
@@ -142,7 +142,7 @@ export default function Home() {
                             }}
                         >
                             <Link
-                                href="/homepage"
+                                href="/dashboard"
                                 className="group rounded-full px-4 py-2 text-[13px] font-semibold transition-all flex items-center justify-center bg-[#015b7a] text-[#88f8ff] no-underline active:scale-95 scale-100 duration-75"
                                 style={{
                                     boxShadow: "0 1px 1px #88f8ff, 0 1px 3px #88f8ff",
