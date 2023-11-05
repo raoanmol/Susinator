@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import {
   Box, Flex, Text, VStack, Button, useToast, Input, Textarea,
-  Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter
+  Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter,
+  List, ListItem, IconButton, Checkbox, Icon, Heading
 } from "@chakra-ui/react";
 import Header from "../components/Header";
-import { AttachmentIcon } from "@chakra-ui/icons";
+import { AttachmentIcon, DeleteIcon, ChatIcon } from "@chakra-ui/icons";
+import { useDropzone } from 'react-dropzone';
 import AWS from "aws-sdk";
 import axios from "axios";
 
@@ -35,23 +37,22 @@ const HomePage = () => {
     const uploadedFile = event.target.files ? event.target.files[0] : null;
     setFile(uploadedFile);
   };
-  
 
-
-  const handleFileUpload = async () => {
-    if (file) {
+  const handleFileUpload = async (fileToUpload) => {
+    if (fileToUpload) {
       setIsUploading(true);
 
       try {
-        const response = await axios.get("http://127.0.0.1:80/bucket"); // Make Axios request
+        const response = await axios.get("http://127.0.0.1:80/bucket");
         console.log(response);
         const bucketName = response.data;
 
+        const s3 = new AWS.S3();
         const params = {
           Bucket: bucketName,
-          Key: "input_file",
+          Key: file.name, // use the file name as the key
           Body: file,
-          ContentType: "application/pdf",
+          ContentType: file.type
         };
 
         s3.upload(params, (err, data) => {
@@ -91,58 +92,112 @@ const HomePage = () => {
     }
   };
 
+  const [uploadModalOpen, setUploadModalOpen] = useState(false);
+  const [dropzoneFiles, setDropzoneFiles] = useState([]);
+
+  const handleDropzoneChange = (files) => {
+    setDropzoneFiles(files);
+  };
+
+  const handleUploadModalClose = () => {
+    setUploadModalOpen(false);
+  };
+
+  const handleRemoveFile = (fileName) => {
+    setDropzoneFiles(dropzoneFiles.filter(file => file.name !== fileName));
+  };
+
+  const handleUpload = () => {
+    dropzoneFiles.forEach(file => {
+      handleFileUpload(file);
+    });
+
+    setUploadModalOpen(false);
+    toast({
+      title: "Uploading Files...",
+      description: "Your files are being uploaded.",
+      status: "info",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: {
+      'application/pdf': ['.pdf'],
+      'text/plain': ['.txt']
+    },
+    onDrop: handleDropzoneChange
+  });
+
+  const chatMessages = [
+    { id: 1, content: "Hey there! How can I help you today?" },
+    { id: 2, content: "I'm looking for assistance with my account." },
+    { id: 3, content: "Certainly! Could you please provide me with your account number?" },
+    { id: 4, content: "It's 123456789. Thank you!" },
+    { id: 5, content: "You're welcome! I'll look that up for you right now." },
+    // ... add more sample messages as needed
+  ];
+
+  const ChatMessage = ({ content }) => (
+    <Box
+      pl={4}
+      pr={4}
+      pt={2}
+      pb={2}
+      display="flex"
+      alignItems="center"
+      bg="gray.300"
+      borderBottom="1px solid"
+      borderColor="gray.200"
+      _last={{ borderBottom: 'none' }} // Removes border from the last item
+    >
+      <Icon as={ChatIcon} color="gray.500" mr={3} />
+      <Text isTruncated maxWidth="90%">
+        {content}
+      </Text>
+    </Box>
+  );
+
   return (
     <Flex flexDirection="column" h="150vh">
       <Header />
       <Flex flexGrow={1} pt={{ base: "60px", md: "150px" }}>
-        <Box w="25%" bg="gray.50" p={4} overflowY="auto">
-          {/* Chat history here */}
+        <Box w="25%" bg="gray.300" p={4} borderRight="1px solid gray" shadow="sm">
+          <Heading size="md" mb={4}>History</Heading>
+          <VStack align="stretch" spacing={4} overflowY="auto">
+            {chatMessages.map((message) => (
+              <ChatMessage key={message.id} content={message.content} />
+            ))}
+          </VStack>
         </Box>
-        <Flex w="75%" flexDirection="column" p={4} bg="white">
-          {/* Other components or content related to text display or chat interactions */}
-          
-          {/* Fixed Bottom File Upload and Text Input Panel */}
-          <Box position="fixed" bottom="0" w="75%" p={4} bg="gray.100" borderTop="1px solid gray">
-            <Flex justifyContent="center">
+        <Flex w="75%" flexDirection="column" p={4} bg="gray.200">
+          <Box position="fixed" bottom="0" w="75%" p={4} bg="gray.200" borderTop="1px solid gray" shadow="md">
+            <Flex justifyContent="center" alignItems="center">
               {/* File Upload Section */}
-              <Flex alignItems="center" mr={6}>
-                <input
-                  id="file-upload"
-                  type="file"
-                  onChange={handleFileChange}
-                  hidden
-                />
+              <Flex alignItems="center" mr={6} borderRadius="md" p={2} shadow="sm">
                 <Button
                   leftIcon={<AttachmentIcon />}
-                  colorScheme="blue"
-                  onClick={() => document.getElementById("file-upload").click()}
+                  colorScheme="purple"
+                  onClick={() => setUploadModalOpen(true)}
                 >
                   Upload File
                 </Button>
-                {file && (
-                  <Button
-                    colorScheme="blue"
-                    onClick={handleFileUpload}
-                    isLoading={isUploading}
-                    loadingText="Uploading..."
-                  >
-                    Upload
-                  </Button>
-                )}
               </Flex>
-  
+
               {/* Text Input Section */}
-              <Button onClick={() => setIsModalOpen(true)}>Insert Text</Button>
+              <Button colorScheme="purple" onClick={() => setIsModalOpen(true)}>Insert Text</Button>
             </Flex>
           </Box>
-  
+
           {/* Modal for Text Input */}
           <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} size="xl">
             <ModalOverlay />
-            <ModalContent>
+            <ModalContent shadow="xl">
               <ModalHeader>Insert Text</ModalHeader>
               <ModalCloseButton />
-              <ModalBody>
+              <ModalBody p={4}>
                 <Textarea
                   value={modalInputText}
                   onChange={handleModalInputChange}
@@ -150,6 +205,8 @@ const HomePage = () => {
                   size="lg"
                   minHeight="600px"
                   width="100%"
+                  border="1px solid blue"
+                  borderRadius="md"
                 />
               </ModalBody>
               <ModalFooter>
@@ -160,14 +217,38 @@ const HomePage = () => {
               </ModalFooter>
             </ModalContent>
           </Modal>
+
+          {/* Upload Modal */}
+          <Modal isOpen={uploadModalOpen} onClose={handleUploadModalClose}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Upload Files</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <Box {...getRootProps()} borderWidth="2px" borderStyle="dashed" borderColor={isDragActive ? "blue.300" : "gray.300"} p={5} textAlign="center">
+                  <input {...getInputProps()} />
+                  <p>Drag and drop files here, or click to select files</p>
+                  <p>Accepted file types: PDF, TXT</p>
+                </Box>
+                <List spacing={3} mt={4}>
+                  {dropzoneFiles.map((file, index) => (
+                    <ListItem key={index} d="flex" alignItems="center" justifyContent="space-between">
+                      <Box flex="1">{file.name}</Box>
+                      <IconButton aria-label="Remove file" icon={<DeleteIcon />} onClick={() => handleRemoveFile(file.name)} />
+                    </ListItem>
+                  ))}
+                </List>
+              </ModalBody>
+              <ModalFooter>
+                <Button onClick={handleUploadModalClose}>Cancel</Button>
+                <Button colorScheme="blue" onClick={handleUpload}>Upload</Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
         </Flex>
       </Flex>
     </Flex>
   );
-  
-
-  
-  
 };
 
 export default HomePage;
