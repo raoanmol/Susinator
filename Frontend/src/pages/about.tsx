@@ -6,6 +6,8 @@ import Header from '../components/Header';
 import DefaultHeadshot from '../../public/headshots/default_headshot.jpg'
 import GavinHeadshot from '../../public/headshots/gavin_headshot.png'
 import AnmolHeadshot from '../../public/headshots/anmol_headshot.jpg'
+import TamanHeadshot from '../../public/headshots/taman_headshot.png'
+import ChaitHeadshot from '../../public/headshots/chait_headshot.png'
 
 export default function About() {
 
@@ -15,7 +17,7 @@ export default function About() {
             school: 'Arizona State University',
             major: 'CS',
             graduationDate: 'May 2025',
-            image: DefaultHeadshot,
+            image: ChaitHeadshot,
             website: 'https://www.linkedin.com/in/chai-t/'
         },
         {
@@ -40,7 +42,7 @@ export default function About() {
             school: 'Arizona State University',
             major: 'CS, Math, EE (Triple Major)',
             graduationDate: 'May 2024',
-            image: DefaultHeadshot,
+            image: TamanHeadshot,
             website: 'https://www.linkedin.com/in/taman-truong/'
 
         },
