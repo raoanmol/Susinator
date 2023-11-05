@@ -45,6 +45,21 @@ The inspiration behind Susinator stemmed from the need to revolutionize contract
 
 ## How to Run this WebApp:
 
+1. ``git clone`` this repository onto your machine
+2. Set up your AWS Credentials
+3. Connect your AWS S3 Bucket
+    - Put ``NEXT_PUBLIC_AWS_ACCESS_KEY_ID_1``, ``NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY_1``, and ``NEXT_PUBLIC_AWS_BUCKET_REGION_1``in ``.env.local`` (in root of frontend folder)
+5. cd SunHacks23
+6. run the frontend
+    - cd frontend
+    - npm install
+    - npm run dev
+7. run the backend
+    - cd Backend
+    - python server.py
+
+
+
 ## Installation and Usage
 
 1. **Clone the Repository**:
