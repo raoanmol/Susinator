@@ -51,7 +51,7 @@ export default function About() {
             school: 'Arizona State University',
             major: 'CS',
             graduationDate: 'May 2025',
-            image: DefaultHeadshot,
+            image: HarishHeadshot,
             website: 'https://www.linkedin.com/in/harishchaurasia/'
         }
     ];
