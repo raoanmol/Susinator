@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import Header from '../components/Header';
 
-import DefaultHeadshot from '../../public/headshots/harish_headshot.png'
+import HarishHeadshot from '../../public/headshots/harish_headshot.png'
 import GavinHeadshot from '../../public/headshots/gavin_headshot.png'
 import AnmolHeadshot from '../../public/headshots/anmol_headshot.jpg'
 import TamanHeadshot from '../../public/headshots/taman_headshot.png'
