@@ -46,6 +46,14 @@ export default function About() {
             website: 'https://www.linkedin.com/in/taman-truong/'
 
         },
+        {
+            name: 'Harish Chaurasia',
+            school: 'Arizona State University',
+            major: 'CS',
+            graduationDate: 'Dec 2025',
+            image: DefaultHeadshot,
+            website: 'https://www.linkedin.com/in/harishchaurasia/'
+        }
     ];
 
     return (

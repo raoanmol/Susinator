@@ -217,6 +217,9 @@ export default function Home() {
                         <a href="https://www.linkedin.com/in/taman-truong/" target="_blank" rel="noopener noreferrer">Taman Truong</a>
                     </p>
                     <p>
+                        <a href="https://www.linkedin.com/in/harishchaurasia/" target="_blank" rel="noopener noreferrer">Harish Chaurasia</a>
+                    </p>
+                    <p>
                         For SunHacks 2023
                     </p>
 

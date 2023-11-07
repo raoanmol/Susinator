@@ -58,4 +58,4 @@ The inspiration behind Susinator stemmed from the need to revolutionize contract
 8. Open a web browser and go to `localhost:3000` to access the application
 
 ## Created By
-_**Anmol Rao, Gavin Holtzapple, Taman Truong & Chaitanya Chaurasia**_
+_**Anmol Rao, Gavin Holtzapple, Taman Truong, Harish Chaurasia & Chaitanya Chaurasia**_
